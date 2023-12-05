@@ -68,6 +68,7 @@ static void le_audio_rx_data_handler(uint8_t const *const p_data, size_t data_si
 				     uint32_t sdu_ref, enum audio_channel channel_index,
 				     size_t desired_data_size)
 {
+	//LOG_INF("data_size: %d, bad_frame: %d, sdu_ref: %d, channel_index: %d, desired_data_size: %d.", data_size, bad_frame, sdu_ref, channel_index, desired_data_size);
 	/* Capture timestamp of when audio frame is received */
 	uint32_t recv_frame_ts = nrfx_timer_capture(&audio_sync_timer_instance,
 						    AUDIO_SYNC_TIMER_CURR_TIME_CAPTURE_CHANNEL);

@@ -1641,10 +1641,24 @@ int le_audio_send(struct encoded_audio enc_audio)
 	if (ep_state_check(headsets[AUDIO_CH_L].sink_stream.ep, BT_BAP_EP_STATE_STREAMING)) {
 		ret = iso_stream_send(enc_audio.data, data_size_pr_stream, headsets[AUDIO_CH_L]);
 		if (ret) {
-			LOG_DBG("Failed to send data to left channel");
+			LOG_INF("Failed to send data to left channel");
 		}
 	}
-
+	else
+	{
+		LOG_INF("left channel not exist.");
+	}
+	if (ep_state_check(headsets[AUDIO_CH_R].sink_stream.ep, BT_BAP_EP_STATE_STREAMING)) {
+		ret = iso_stream_send(enc_audio.data, data_size_pr_stream, headsets[AUDIO_CH_R]);
+		if (ret) {
+			LOG_INF("Failed to send data to right channel");
+		}
+	}
+	else
+	{
+		LOG_INF("right channel not exist.");
+	}
+#if 0
 	if (ep_state_check(headsets[AUDIO_CH_R].sink_stream.ep, BT_BAP_EP_STATE_STREAMING)) {
 		if (enc_audio.num_ch == 1) {
 			ret = iso_stream_send(enc_audio.data, data_size_pr_stream,
@@ -1657,7 +1671,7 @@ int le_audio_send(struct encoded_audio enc_audio)
 			LOG_DBG("Failed to send data to right channel");
 		}
 	}
-
+#endif
 	return 0;
 }
 

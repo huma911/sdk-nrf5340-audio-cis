@@ -103,6 +103,7 @@ int sw_codec_encode(void *pcm_data, size_t pcm_size, uint8_t **encoded_data, siz
 int sw_codec_decode(uint8_t const *const encoded_data, size_t encoded_size, bool bad_frame,
 		    void **decoded_data, size_t *decoded_size)
 {
+	//LOG_INF("m_config.decoder.num_ch: %d.", m_config.decoder.num_ch);
 	if (!m_config.decoder.enabled) {
 		LOG_ERR("Decoder has not been initialized");
 		return -ENXIO;
@@ -173,6 +174,7 @@ int sw_codec_decode(uint8_t const *const encoded_data, size_t encoded_size, bool
 					return ret;
 				}
 			}
+			//LOG_INF("CONFIG_AUDIO_BIT_DEPTH_BITS: %d, pcm_size_session: %d, pcm_size_stereo: %d.", CONFIG_AUDIO_BIT_DEPTH_BITS, pcm_size_session, pcm_size_stereo);
 			ret = pscm_combine(pcm_data_mono, pcm_data_mono_right, pcm_size_session,
 					   CONFIG_AUDIO_BIT_DEPTH_BITS, pcm_data_stereo,
 					   &pcm_size_stereo);
